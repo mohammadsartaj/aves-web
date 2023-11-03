@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing_parallax</title>
+  <link rel="stylesheet" href="preview.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!-- nve bar start -->
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+          <div class="nav-title">
+            Aves
+          </div>
+        </div>
+        <div class="nav-btn">
+          <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+        </div>
+        
+        <div class="nav-links">
+          <a href="in.html">Home</a>
+          <a href="about.html" >About</a>
+          <a href="contact.html">contact</a>
+          <a href="preview.html">Preview</a>
+        </div>
+      </div>
+
+      <!-- section start -->
+     <section id="A">
+        <div class="drag-area">
+          <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+         <header>Drag & Drop to Upload File</header>
+         <span>OR</span>
+         <button>Browse File</button>
+         <input type="file" hidden>
+       </div>
+       <div class="pre">
+        <button id="predict-button">Preview</button>
+        <p>PREDECTION: <span id="probability">...</span></p>
+       </div>
+     </section>
+      <!-- secton end -->
+
+      <!-- footerstart -->
+      <footer>
+        <div class="footer-content">
+          <h3>Aves</h3>
+          <p>A ml tool used to detect birds though image recongition</p>
+          <ul class="social">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-bottom">
+          <p>copyright &copy;2023 AVES, designed by <span>Synick</span></p>
+        </div>
+      </footer>
+
+      <!-- footerend -->
+
+      <script src="drop.js"></script>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  let base64Image;
+  $("#predict-button").click(function(){
+          let message = {
+          image: base64Image
+      }
+      console.log(message);
+      $.post("http://127.0.0.1:5000/predict", JSON.stringify(message), function(response){
+          $("#result").text(response.prediction.result);
+          // $("#probability").text(response.prediction.accuracy.toFixed(2));
+          console.log(response);
+      });
+  });
+  
+</script>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing_parallax</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="{{url_for('static',filename='css/style.css') }}"> -->
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"/>
+  <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+  <div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+      <div class="nav-title">
+        Aves
+      </div>
+    </div>
+    <div class="nav-btn">
+      <label for="nav-check">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+    
+    <div class="nav-links">
+      <a href="#" target="_blank">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="preview.html">Preview</a>
+    </div>
+  </div>
+  <!-- <header id="header">
+    <a href="#" class="logo">
+      <img src="./asset/bird.png" alt="logo" width="30px" height="30px">
+      AVES
+    </a>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">contact</a></li>
+      <li><a href="product.html">Product</a></li>
+    </ul> -->
+    <!-- <div class="bnt">
+    <button class="lbtn" type="button">LogIn</button>
+    <button class="sbtn" type="button">SignUp</button>
+    </div> -->
+  <!-- </header> -->
+  <section >
+    <h2 id="text"><span>A Birds detection Ml Application</span><br> AVES Detection</br></h2>
+    <img src="./asset/bird1.png" alt="" id="bird1">
+    <img src="./asset/bird2.png" alt="" id="bird2">
+    <img src="./asset/forest.png" alt="" id="forest">
+    <a href="preview.html" id="btn">Let Start</a>
+    <img src="./asset/rocks.png" alt="" id="rocks">
+    <img src="./asset/water.png" alt="" id="water">
+    <!-- <img src="{{url_for('static',filename='asset/bird1.png') }}" alt="">
+    <img src="{{url_for('static',filename='asset/bird2.png') }}" alt="" id="bird2">
+    <img src="{{url_for('static',filename='asset/forest.png') }}" alt="" id="forest">
+    <a href="/preview" id="btn">Let Start</a>
+    <img src="{{url_for('static',filename='asset/rocks.png') }}" alt="" id="rocks">
+    <img src="{{url_for('static',filename='asset/water.png') }}" alt="" id="water"> -->
+
+  </section>
+  <div class="sec">
+    <h2>Introduction</h2>
+    <p>Are you a bird enthusiast who is always on the lookout for new and exciting ways to identify different bird species? Well, I have some great news for you! The Aves Detection webapp has been launched and it is a game-changer in the world of birdwatching. This innovative webapp has been built using web and machine learning (ml) techniques, making it incredibly accurate and efficient in detecting different types of birds.
+
+      Gone are the days when you had to rely solely on your own knowledge and experience to identify birds in the wild. With the Aves Detection webapp, you can now take a picture of any bird and let the app do the rest. The app uses advanced machine learning algorithms that have been trained on thousands of images of different bird species, making it highly accurate in its identification.
+      
+      What's more, the Aves Detection webapp is incredibly easy to use. Simply upload your image and within seconds, the app will provide you with all the information you need about the bird species in question. Whether you're a seasoned birdwatcher or just starting out, this webapp is sure to enhance your experience and help you identify birds like never before.
+      
+      So what are you waiting for? Try out the Aves Detection webapp today and take your birdwatching to the next level! With its cutting-edge technology and ease of use, this webapp is sure to become an indispensable tool for bird enthusiasts everywhere. <br>--updates arriving soon<br> Team Synick</p>
+  </div>
+   <div class="sec1">
+     <h1>Gallery </h1> 
+     <div class="gal">
+       <div class="item item-1">
+       </div>
+       <div class="item item-2">
+       </div>
+       <div class="item item-3">
+       </div>
+       <div class="item item-4">
+       </div>
+     </div>
+   </div>
+   <section class="sec2">
+    <div class="row">
+      <h1>Our Features</h1>
+    </div>
+    <div class="row">
+      <!-- Column One -->
+      <div class="column">
+        <div class="card">
+          <div class="icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <h3>Easy Access</h3>
+          <p>
+            we Just need to Drop or upload a image of bird as userinput.This ml model will try to predect the species of bird
+          </p>
+        </div>
+      </div>
+      <!-- Column Two -->
+      <div class="column">
+        <div class="card">
+          <div class="icon">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3>Machine Learing Tool</h3>
+          <p>
+            There is a Inspection-V3 ml model in used which will reads the input image and classify the image using ml algorithms in it
+          </p>
+        </div>
+      </div>
+      <!-- Column Three -->
+      <div class="column">
+        <div class="card">
+          <div class="icon">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3>Quick Support</h3>
+          <p>
+            if any issue a user faces he can easyly report the issue or contact us
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Script>
+    let text= document.getElementById('text');
+    let bird1= document.getElementById('bird1');
+    let bird2= document.getElementById('bird2');
+    let btn= document.getElementById('btn');
+    let rocks= document.getElementById('rocks');
+    let forest= document.getElementById('forest');
+    let water= document.getElementById('water');
+    let header= document.getElementById('header');
+
+    window.addEventListener('scroll', function(){
+      let value= window.scrollY;
+      text.style.top=50+value* -0.5 + '%';
+      bird1.style.top=value* -1.5+'px';
+      bird1.style.left=value*2+'px';
+      bird2.style.top=value* -1.5+'px';
+      bird2.style.left=value*-5+'px';
+      btn.style.marginTop=value*1.5+'px';
+      rocks.style.top=value* -0.12+'px';
+      forest.style.top=value*0.25+'px';
+      header.style.top=value*0.5+'px';
+    })
+  </Script>
+  <footer>
+    <div class="footer-content">
+      <h3>Aves</h3>
+      <p>A ml tool used to detect birds though image recongition</p>
+      <ul class="social">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>copyright &copy;2023 AVES, designed by <span>Synick</span></p>
+    </div>
+  </footer>
+</body>
+</html>
