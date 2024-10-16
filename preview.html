@@ -1,90 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing_parallax</title>
-  <link rel="stylesheet" href="preview.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-</head>
-<body>
-    <!-- nve bar start -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing_parallax</title>
+    <link rel="stylesheet" href="preview.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
     <div class="nav">
-        <input type="checkbox" id="nav-check">
-        <div class="nav-header">
-          <div class="nav-title">
-            Aves
-          </div>
-        </div>
-        <div class="nav-btn">
-          <label for="nav-check">
-            <span></span>
-            <span></span>
-            <span></span>
-          </label>
-        </div>
-        
-        <div class="nav-links">
-          <a href="in.html">Home</a>
-          <a href="about.html" >About</a>
-          <a href="contact.html">contact</a>
-          <a href="preview.html">Preview</a>
-        </div>
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">Aves</div>
+      </div>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
       </div>
 
-      <!-- section start -->
-     <section id="A">
-        <div class="drag-area">
+      <div class="nav-links">
+        <a href="in.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="preview.html">Preview</a>
+      </div>
+    </div>
+
+    <section id="A">
+      <div class="drag-area">
           <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-         <header>Drag & Drop to Upload File</header>
-         <span>OR</span>
-         <button>Browse File</button>
-         <input type="file" hidden>
-       </div>
-       <div class="pre">
-        <button id="predict-button">Preview</button>
-        <p>PREDECTION: <span id="probability">...</span></p>
-       </div>
-     </section>
-      <!-- secton end -->
-
-      <!-- footerstart -->
-      <footer>
-        <div class="footer-content">
-          <h3>Aves</h3>
-          <p>A ml tool used to detect birds though image recongition</p>
-          <ul class="social">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-          </ul>
-        </div>
-        <div class="footer-bottom">
-          <p>copyright &copy;2023 AVES, designed by <span>Synick</span></p>
-        </div>
-      </footer>
-
-      <!-- footerend -->
-
-      <script src="drop.js"></script>
-</body>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-  let base64Image;
-  $("#predict-button").click(function(){
-          let message = {
-          image: base64Image
-      }
-      console.log(message);
-      $.post("http://127.0.0.1:5000/predict", JSON.stringify(message), function(response){
-          $("#result").text(response.prediction.result);
-          // $("#probability").text(response.prediction.accuracy.toFixed(2));
-          console.log(response);
-      });
-  });
+          <header>Drag & Drop to Upload File</header>
+          <span>OR</span>
+          <button id="browse-button">Browse File</button>
+          <input type="file" id="file-input" hidden />
+      </div>
+      <div class="pre">
+          <button id="predict-button" disabled>Preview</button>
+          <p>Prediction: <span id="probability">...</span></p>
+          <p>Details: <span id="result">...</span></p>
+      </div>
+      <canvas id="canvas" style="display: none"></canvas> <!-- Canvas for image comparison -->
+  </section>
   
-</script>
+
+    <footer>
+      <div class="footer-content">
+        <h3>Aves</h3>
+        <p>A ML tool used to detect birds through image recognition</p>
+        <ul class="social">
+          <li>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>copyright &copy;2023 AVES, designed by <span>Synick</span></p>
+      </div>
+    </footer>
+
+    <script src="drop.js"></script>
+    <script src="birds.js"></script>
+    <!-- Include the birds.js file -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      let uploadedImageSrc;
+
+      // Handle file input
+      document
+        .getElementById("browse-button")
+        .addEventListener("click", function () {
+          document.getElementById("file-input").click();
+        });
+
+      document
+        .getElementById("file-input")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+              uploadedImageSrc = reader.result; // Base64 encoded string
+              document.getElementById("predict-button").disabled = false; // Enable the predict button
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Predict button click event
+      $("#predict-button").click(function () {
+        const imgElement = new Image();
+        imgElement.src = uploadedImageSrc;
+
+        imgElement.onload = function () {
+          const canvas = document.getElementById("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = imgElement.width;
+          canvas.height = imgElement.height;
+          context.drawImage(imgElement, 0, 0);
+
+          const uploadedImageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          ).data;
+
+          // Load each bird image and compare
+          let foundMatch = false;
+
+          birdImages.forEach((bird) => {
+            const storedImg = new Image();
+            storedImg.src = bird.image;
+            storedImg.onload = function () {
+              const storedCanvas = document.createElement("canvas");
+              storedCanvas.width = storedImg.width;
+              storedCanvas.height = storedImg.height;
+              const storedContext = storedCanvas.getContext("2d");
+              storedContext.drawImage(storedImg, 0, 0);
+
+              const storedImageData = storedContext.getImageData(
+                0,
+                0,
+                storedCanvas.width,
+                storedCanvas.height
+              ).data;
+
+              if (compareImages(uploadedImageData, storedImageData)) {
+                $("#result").text(bird.details);
+                $("#probability").text("Image matched with " + bird.name);
+                foundMatch = true;
+              }
+
+              if (foundMatch) return; // Stop searching once we find a match
+            };
+          });
+
+          if (!foundMatch) {
+            $("#result").text("No matching bird found.");
+            $("#probability").text("");
+          }
+        };
+      });
+
+      function compareImages(uploadedData, storedData) {
+        // Compare pixel data (simple comparison)
+        if (uploadedData.length !== storedData.length) return false;
+
+        // Check if pixel data is the same
+        for (let i = 0; i < uploadedData.length; i++) {
+          if (uploadedData[i] !== storedData[i]) {
+            return false; // Images do not match
+          }
+        }
+        return true; // Images match
+      }
+    </script>
+  </body>
 </html>
